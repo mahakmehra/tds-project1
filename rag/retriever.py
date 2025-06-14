@@ -1,8 +1,15 @@
+# rag/retriever.py
+
+import os
+
+# ✅ Set Hugging Face cache directories to avoid /.cache permission errors
+os.environ["TRANSFORMERS_CACHE"] = "/tmp/hf_cache"
+os.environ["HF_HOME"] = "/tmp/hf_home"
+
 import json
 import numpy as np
 from sentence_transformers import SentenceTransformer
 from typing import List, Dict
-from pathlib import Path
 from rag.config import settings
 
 class Retriever:
@@ -39,20 +46,17 @@ class Retriever:
 
     def retrieve(self, query: str, top_k: int = 3) -> List[Dict]:
         """Retrieve most relevant documents for a query"""
-        # Encode query
         query_embedding = self.embedder.encode([query])
         
-        # Compute similarities
         scores = np.dot(self.embeddings, query_embedding.T).flatten()
         top_indices = np.argsort(scores)[-top_k:][::-1]
         
-        # Prepare results with full text
         results = []
         for idx in top_indices:
             item_meta = self.metadata[idx]
             results.append({
                 "content": self.content_lookup.get(item_meta["url"], "Content not available"),
-                "score": float(scores[idx]),  # Convert numpy float to native float
+                "score": float(scores[idx]),
                 "metadata": {
                     "title": item_meta.get("title", "Untitled"),
                     "url": item_meta.get("url", "#"),

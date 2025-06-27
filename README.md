@@ -26,10 +26,10 @@ POST https://mahakmehh-virtual-ta.hf.space/api/
 }
 ```
 
-🧪 Example cURL
 curl -X POST https://mahakmehh-virtual-ta.hf.space/api/ \
   -H "Content-Type: application/json" \
   -d '{"question": "Which model should I use?", "image": ""}'
+
 
 📥 Response Format
 {

@@ -25,8 +25,9 @@ POST https://mahakmehh-virtual-ta.hf.space/api/
   "image": ""
 }
 ```
-🧪 Example cURL
-```json
+### 🧪 Example cURL
+
+```bash
 curl -X POST https://mahakmehh-virtual-ta.hf.space/api/ \
   -H "Content-Type: application/json" \
   -d '{"question": "Which model should I use?", "image": ""}'

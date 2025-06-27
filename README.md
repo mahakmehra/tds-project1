@@ -25,13 +25,15 @@ POST https://mahakmehh-virtual-ta.hf.space/api/
   "image": ""
 }
 ```
-
+🧪 Example cURL
+```json
 curl -X POST https://mahakmehh-virtual-ta.hf.space/api/ \
   -H "Content-Type: application/json" \
   -d '{"question": "Which model should I use?", "image": ""}'
-
+```
 
 📥 Response Format
+```json 
 {
   "answer": "You should use `gpt-3.5-turbo` for this assignment.",
   "links": [
@@ -41,3 +43,4 @@ curl -X POST https://mahakmehh-virtual-ta.hf.space/api/ \
     }
   ]
 }
+```
